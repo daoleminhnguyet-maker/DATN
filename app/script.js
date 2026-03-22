@@ -2,7 +2,7 @@
 const ordersData = [   { id: 56, code: '#056', status: 'Đã điều xe', statusClass: 'status-assigned', pickupDate: '20/03/2026', pickupTime: '12:00', pickupAddress: '391 Võ Nguyên Giáp, An Phú, Thủ Đức, TP.HCM', deliveryAddress: '2/65 An Dương Vương, Phú Thượng, Tây Hồ, Hà Nội', distance: '650 Km', customer: 'Công ty TNHH Thương Mại Vạn Thắng Đạt', cargoType: 'Thực phẩm đông lạnh', weight: '100 tấn', saleStaff: 'Trương Ngọc Anh Tuấn', orderType: 'Đông lạnh', totalAmount: '31,800,000đ' },
     { id: 55, code: '#055', status: 'Đơn mới', statusClass: 'status-new', pickupDate: '01/03/2026', pickupTime: '11:00', pickupAddress: '18 Phan Đình Phùng, Hải Châu, Đà Nẵng', deliveryAddress: '18 Phan Đình Phùng, Hải Châu, Đà Nẵng', distance: '23 Km', customer: 'Công ty TNHH Marine Functional Việt Nam', cargoType: 'Thiết bị cơ khí', weight: '12 tấn', saleStaff: 'Đoàn Quốc Huy', orderType: 'Hàng chuyến', totalAmount: '4,257,147đ' },
     { id: 54, code: '#054', status: 'Chờ xe', statusClass: 'status-waiting', pickupDate: '10/03/2026', pickupTime: '09:00', pickupAddress: '54 Trường Chinh, Thanh Xuân, Hà Nội', deliveryAddress: '68 Nguyễn Văn Linh, HN', distance: '50 Km', customer: 'Công ty TNHH Portever Shipping Việt Nam', cargoType: 'Hóa chất', weight: '3 tấn', saleStaff: 'Đào Lê Minh Nguyệt', orderType: 'Hàng cẩu', totalAmount: '6,000,000đ' },
-    { id: 48, code: '#048', status: 'Đã điều xe', statusClass: 'status-assigned', pickupDate: '10/02/2026', pickupTime: '07:30', pickupAddress: '54 Trường Chinh, Thanh Xuân, Hà Nội', deliveryAddress: '68 Nguyễn Văn Linh, HN', distance: '30 Km', customer: 'Công ty Cổ Phần EZ Cosmetic Việt Nam', cargoType: 'Thép cuộn', weight: '6 tấn', saleStaff: 'Đào Lê Minh Nguyệt', orderType: 'Hàng cẩu', totalAmount: '3,000,000đ' },
+    { id: 48, code: '#048', status: 'Đơn mới', statusClass: 'status-assigned', pickupDate: '10/02/2026', pickupTime: '07:30', pickupAddress: '54 Trường Chinh, Thanh Xuân, Hà Nội', deliveryAddress: '68 Nguyễn Văn Linh, HN', distance: '30 Km', customer: 'Công ty Cổ Phần EZ Cosmetic Việt Nam', cargoType: 'Thép cuộn', weight: '6 tấn', saleStaff: 'Đào Lê Minh Nguyệt', orderType: 'Hàng cẩu', totalAmount: '3,000,000đ' },
     { id: 47, code: '#047', status: 'Chờ xe', statusClass: 'status-waiting', pickupDate: '09/02/2026', pickupTime: '09:00', pickupAddress: 'Vina Cosmo, KCX Tân Thuận, Quận 7', deliveryAddress: '95 Nguyễn Thị Minh Khai, Nha Trang, Khánh Hòa', distance: '150 Km', customer: 'Công Ty TNHH Shirogane Logistics Việt Nam', cargoType: 'Đồ nội thất', weight: '3 tấn', saleStaff: 'Đào Lê Minh Nguyệt', orderType: 'Hàng chuyến', totalAmount: '5,525,000đ' },
     { id: 45, code: '#045', status: 'Hoàn thành', statusClass: 'status-delivering', pickupDate: '07/02/2026', pickupTime: '08:00', pickupAddress: 'Đức Hòa', deliveryAddress: 'Long Thành', distance: '50 Km', customer: 'Cty CP VT Thiết Bị Công Trình Minh Đức', cargoType: 'Cuộn cáp', weight: '15 tấn', saleStaff: 'Trần Lê Thị Hiệp', orderType: 'Hàng cẩu', totalAmount: '6,480,000đ' },
     { id: 43, code: '#043', status: 'Chờ duyệt', statusClass: 'status-waiting', pickupDate: '04/02/2026', pickupTime: '08:00', pickupAddress: 'Q12', deliveryAddress: 'Q9', distance: '22 Km', customer: 'Anh Sinh', cargoType: 'thép', weight: '12 tấn', saleStaff: 'Trương Ngọc Anh Tuấn', orderType: 'Hàng chuyến', totalAmount: '5,057,408đ' },
@@ -67,7 +67,102 @@ function filterOrders() {
 if (!localStorage.getItem('isLoggedIn')) {
     window.location.href = 'login.html';
 }
+// ========== DROPDOWN MENU - THÊM VÀO CUỐI FILE ==========
 
+const userMenu = document.getElementById('userMenu');
+const userDropdown = document.getElementById('userDropdown');
+const profileBtn = document.getElementById('profileBtn');
+const changeRoleBtn = document.getElementById('changeRoleBtn');
+const roleList = document.getElementById('roleList');
+const logoutBtn = document.getElementById('logoutBtn');
+
+// Toggle dropdown khi click vào user menu
+if (userMenu) {
+    userMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (userDropdown) userDropdown.classList.toggle('show');
+        if (roleList) roleList.style.display = 'none';
+    });
+}
+
+// Đóng dropdown khi click ra ngoài
+document.addEventListener('click', (e) => {
+    if (userMenu && userDropdown) {
+        if (!userMenu.contains(e.target) && !userDropdown.contains(e.target)) {
+            userDropdown.classList.remove('show');
+        }
+    }
+});
+
+// Xử lý click vào Hồ sơ
+if (profileBtn) {
+    profileBtn.addEventListener('click', () => {
+        alert('Chức năng đang phát triển');
+        if (userDropdown) userDropdown.classList.remove('show');
+    });
+}
+
+// Xử lý click vào Đổi vai trò
+if (changeRoleBtn) {
+    changeRoleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (roleList) {
+            const isVisible = roleList.style.display === 'block';
+            roleList.style.display = isVisible ? 'none' : 'block';
+        }
+    });
+}
+
+// Xử lý chọn vai trò
+document.querySelectorAll('.role-item').forEach(role => {
+    role.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const roleName = role.dataset.role;
+        const userRoleElement = document.querySelector('.user-role');
+        
+        if (userRoleElement) {
+            userRoleElement.textContent = roleName;
+        }
+        
+        localStorage.setItem('userRole', roleName);
+        alert(`Đã chuyển sang vai trò: ${roleName}`);
+        
+        if (roleList) roleList.style.display = 'none';
+        if (userDropdown) userDropdown.classList.remove('show');
+    });
+});
+
+// Xử lý đăng xuất
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('savedUsername');
+        localStorage.removeItem('savedPassword');
+        localStorage.removeItem('rememberMe');
+        window.location.href = 'login.html';
+    });
+}
+
+// Đọc vai trò đã lưu khi load trang
+window.addEventListener('DOMContentLoaded', () => {
+    const savedRole = localStorage.getItem('userRole');
+    if (savedRole) {
+        const userRoleElement = document.querySelector('.user-role');
+        if (userRoleElement) {
+            userRoleElement.textContent = savedRole;
+        }
+    }
+    
+    const userName = localStorage.getItem('userName');
+    if (userName) {
+        const userNameElement = document.querySelector('.user-name');
+        if (userNameElement) {
+            userNameElement.textContent = userName;
+        }
+    }
+});
 function renderTable() {
     const filtered = filterOrders();
     const tbody = document.getElementById('tableBody');
