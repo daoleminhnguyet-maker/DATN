@@ -1,5 +1,15 @@
 // Dữ liệu mẫu - ĐỂ TRỐNG
-const ordersData = [];
+const ordersData = [   { id: 56, code: '#056', status: 'Đã điều xe', statusClass: 'status-assigned', pickupDate: '20/03/2026', pickupTime: '12:00', pickupAddress: '391 Võ Nguyên Giáp, An Phú, Thủ Đức, TP.HCM', deliveryAddress: '2/65 An Dương Vương, Phú Thượng, Tây Hồ, Hà Nội', distance: '650 Km', customer: 'Công ty TNHH Thương Mại Vạn Thắng Đạt', cargoType: 'Thực phẩm đông lạnh', weight: '100 tấn', saleStaff: 'Trương Ngọc Anh Tuấn', orderType: 'Đông lạnh', totalAmount: '31,800,000đ' },
+    { id: 55, code: '#055', status: 'Đơn mới', statusClass: 'status-new', pickupDate: '01/03/2026', pickupTime: '11:00', pickupAddress: '18 Phan Đình Phùng, Hải Châu, Đà Nẵng', deliveryAddress: '18 Phan Đình Phùng, Hải Châu, Đà Nẵng', distance: '23 Km', customer: 'Công ty TNHH Marine Functional Việt Nam', cargoType: 'Thiết bị cơ khí', weight: '12 tấn', saleStaff: 'Đoàn Quốc Huy', orderType: 'Hàng chuyến', totalAmount: '4,257,147đ' },
+    { id: 54, code: '#054', status: 'Chờ xe', statusClass: 'status-waiting', pickupDate: '10/03/2026', pickupTime: '09:00', pickupAddress: '54 Trường Chinh, Thanh Xuân, Hà Nội', deliveryAddress: '68 Nguyễn Văn Linh, HN', distance: '50 Km', customer: 'Công ty TNHH Portever Shipping Việt Nam', cargoType: 'Hóa chất', weight: '3 tấn', saleStaff: 'Đào Lê Minh Nguyệt', orderType: 'Hàng cẩu', totalAmount: '6,000,000đ' },
+    { id: 48, code: '#048', status: 'Đã điều xe', statusClass: 'status-assigned', pickupDate: '10/02/2026', pickupTime: '07:30', pickupAddress: '54 Trường Chinh, Thanh Xuân, Hà Nội', deliveryAddress: '68 Nguyễn Văn Linh, HN', distance: '30 Km', customer: 'Công ty Cổ Phần EZ Cosmetic Việt Nam', cargoType: 'Thép cuộn', weight: '6 tấn', saleStaff: 'Đào Lê Minh Nguyệt', orderType: 'Hàng cẩu', totalAmount: '3,000,000đ' },
+    { id: 47, code: '#047', status: 'Chờ xe', statusClass: 'status-waiting', pickupDate: '09/02/2026', pickupTime: '09:00', pickupAddress: 'Vina Cosmo, KCX Tân Thuận, Quận 7', deliveryAddress: '95 Nguyễn Thị Minh Khai, Nha Trang, Khánh Hòa', distance: '150 Km', customer: 'Công Ty TNHH Shirogane Logistics Việt Nam', cargoType: 'Đồ nội thất', weight: '3 tấn', saleStaff: 'Đào Lê Minh Nguyệt', orderType: 'Hàng chuyến', totalAmount: '5,525,000đ' },
+    { id: 45, code: '#045', status: 'Hoàn thành', statusClass: 'status-delivering', pickupDate: '07/02/2026', pickupTime: '08:00', pickupAddress: 'Đức Hòa', deliveryAddress: 'Long Thành', distance: '50 Km', customer: 'Cty CP VT Thiết Bị Công Trình Minh Đức', cargoType: 'Cuộn cáp', weight: '15 tấn', saleStaff: 'Trần Lê Thị Hiệp', orderType: 'Hàng cẩu', totalAmount: '6,480,000đ' },
+    { id: 43, code: '#043', status: 'Chờ duyệt', statusClass: 'status-waiting', pickupDate: '04/02/2026', pickupTime: '08:00', pickupAddress: 'Q12', deliveryAddress: 'Q9', distance: '22 Km', customer: 'Anh Sinh', cargoType: 'thép', weight: '12 tấn', saleStaff: 'Trương Ngọc Anh Tuấn', orderType: 'Hàng chuyến', totalAmount: '5,057,408đ' },
+    { id: 40, code: '#040', status: 'Nhận đơn', statusClass: 'status-assigned', pickupDate: '03/02/2026', pickupTime: '10:30', pickupAddress: '54 Trường Chinh, Thanh Xuân, Hà Nội', deliveryAddress: '95 Nguyễn Thị Minh Khai, Tân Tiến, Nha Trang, Khánh Hòa', distance: '150 Km', customer: 'Công Ty TNHH Shirogane Logistics Việt Nam', cargoType: 'thép', weight: '6 tấn', saleStaff: 'Đào Lê Minh Nguyệt', orderType: 'Hàng chuyến', totalAmount: '6,000,000đ' },
+    { id: 33, code: '#033', status: 'Đã điều xe', statusClass: 'status-assigned', pickupDate: '31/01/2026', pickupTime: '08:00', pickupAddress: 'KCN Lê Minh Xuân, Bình Chánh', deliveryAddress: 'KCN Quốc tế Protrade, Bình Dương', distance: '55 Km', customer: 'Công Ty TNHH Điện Cơ Hà Nội', cargoType: 'Máy Motor', weight: '2 tấn', saleStaff: 'Nguyễn Thị Thu Thảo', orderType: 'Hàng cẩu', totalAmount: '3,780,000đ' },
+    { id: 32, code: '#032', status: 'Xe dự kiến', statusClass: 'status-assigned', pickupDate: '31/01/2026', pickupTime: '07:00', pickupAddress: 'Intel, Quận 9', deliveryAddress: 'Intel, Quận 9', distance: '...', customer: 'Công ty TNHH FEYANA', cargoType: 'Dụng Cụ', weight: '5 tấn', saleStaff: 'Nguyễn Thị Thu Thảo', orderType: 'Hàng bo', totalAmount: '2,160,000đ' },
+];
 
 // Hoặc nếu muốn hiển thị thông báo trống:
 // const ordersData = [];
@@ -53,6 +63,10 @@ function filterOrders() {
     
     return filtered;
 }
+// Kiểm tra trạng thái đăng nhập - THÊM VÀO ĐẦU FILE
+if (!localStorage.getItem('isLoggedIn')) {
+    window.location.href = 'login.html';
+}
 
 function renderTable() {
     const filtered = filterOrders();
@@ -82,10 +96,16 @@ function renderTable() {
     const end = start + rowsPerPage;
     const pageData = filtered.slice(start, end);
     
-    tbody.innerHTML = pageData.map(order => `
+    tbody.innerHTML = pageData.map(order => {
+        //chỉ hiển thị khi là đơn mới
+        const isSelectable = order.status === 'Đơn mới';
+
+        return `
         <tr class="${selectedOrders.includes(order.id) ? 'selected' : ''}">
             <td class="checkbox-col">
+            ${isSelectable ? `
                 <input type="checkbox" class="row-checkbox" data-id="${order.id}" ${selectedOrders.includes(order.id) ? 'checked' : ''}>
+            ` : ''}
             </td>
             <td><span style="color:#2563eb; font-weight:500;">${order.code}</span></td>
             <td><span class="status-badge ${order.statusClass}">${order.status}</span></td>
@@ -106,9 +126,9 @@ function renderTable() {
             <td>${order.orderType}</td>
             <td class="right"><strong>${order.totalAmount}</strong></td>
         </tr>
-    `).join('');
+    `}).join('');
     
-    // Re-attach checkbox events
+    // Re-attach checkbox events( chỉ cho checkbox của đơn mới)
     document.querySelectorAll('.row-checkbox').forEach(cb => {
         cb.addEventListener('change', (e) => {
             const id = parseInt(e.target.dataset.id);
@@ -166,7 +186,8 @@ function updateBulkBar() {
     const filtered = filterOrders();
     const selectAllCheckbox = document.getElementById('selectAll');
     if (selectAllCheckbox && filtered.length > 0) {
-        const visibleIds = filtered.map(o => o.id);
+        //chỉ lấy đơn mới
+        const visibleIds = filtered.filter(o => o.status === 'Đơn mới').map(o => o.id);
         const allSelected = visibleIds.length > 0 && visibleIds.every(id => selectedOrders.includes(id));
         selectAllCheckbox.checked = allSelected;
     } else if (selectAllCheckbox) {
@@ -177,8 +198,9 @@ function updateBulkBar() {
 // Event listeners
 document.getElementById('selectAll')?.addEventListener('change', (e) => {
     const filtered = filterOrders();
+    const selectableOrders = filtered.filter(order => order.status === 'Đơn mới');
     if (e.target.checked) {
-        filtered.forEach(order => {
+        selectableOrders.forEach(order => {
             if (!selectedOrders.includes(order.id)) selectedOrders.push(order.id);
         });
     } else {
