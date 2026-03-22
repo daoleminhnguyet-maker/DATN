@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMERP - Danh sách đơn chuyến</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-area">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <img src="https://hmerp.laravel.cloud/images/logo_brand.png" alt="HMERP" class="logo">
+            </div>
+            <div class="user-menu">
+                <div class="avatar">Đ</div>
+                <div class="user-info">
+                    <div class="user-name">Đào Lê Minh Nguyệt</div>
+                    <div class="user-role">Admin</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <img src="https://hmerp.laravel.cloud/images/logo_brand.png" alt="HMERP">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <div class="nav-group-title">Kinh doanh</div>
+                    <a href="#" class="nav-item active">
+                        <span class="nav-icon">📦</span>
+                        <span>Hàng chuyến</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">📋</span>
+                        <span>Hàng logistics</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">🚚</span>
+                        <span>Hàng chành</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">📊</span>
+                        <span>Báo cáo</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">👥</span>
+                        <span>Khách hàng</span>
+                    </a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group-title">Yêu cầu</div>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">📅</span>
+                        <span>Nghỉ phép</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">📝</span>
+                        <span>Đề xuất</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Overlay mobile -->
+        <div class="overlay" id="overlay"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1 class="page-title">Danh sách đơn chuyến</h1>
+
+            <!-- Button Group -->
+            <div class="btn-group">
+                <button class="btn btn-primary">
+                    <span>📦</span> Hàng chuyến
+                </button>
+                <button class="btn btn-primary">
+                    <span>🚗</span> Hàng bo
+                </button>
+                <button class="btn btn-primary">
+                    <span>🏗️</span> Hàng cẩu-nâng
+                </button>
+                <button class="btn btn-primary">
+                    <span>❄️</span> Hàng đông lạnh
+                </button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="all">📋 Tất cả</button>
+                <button class="tab" data-tab="new">✨ Mới</button>
+                <button class="tab" data-tab="waiting">🚚 Chờ xe</button>
+                <button class="tab" data-tab="delivering">🚛 Đang vận chuyển</button>
+                <button class="tab" data-tab="completed">✅ Hoàn thành</button>
+                <button class="tab" data-tab="cancelled">❌ Đã hủy</button>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-card">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label class="filter-label">🔍 Tìm kiếm</label>
+                        <input type="text" class="filter-input" placeholder="Mã đơn, khách hàng..." id="searchInput">
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">🏷️ Loại hàng</label>
+                        <select class="filter-input" id="typeFilter">
+                            <option value="">Tất cả</option>
+                            <option value="Hàng chuyến">Hàng chuyến</option>
+                            <option value="Hàng bo">Hàng bo</option>
+                            <option value="Hàng cẩu">Hàng cẩu</option>
+                            <option value="Đông lạnh">Đông lạnh</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Từ ngày</label>
+                        <input type="date" class="filter-input" id="dateFrom">
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Đến ngày</label>
+                        <input type="date" class="filter-input" id="dateTo">
+                    </div>
+                    <button class="btn-reset" id="resetFilters">Đặt lại</button>
+                </div>
+            </div>
+
+            <!-- Bulk Actions Bar -->
+            <div class="bulk-bar" id="bulkBar" style="display: none;">
+                <div class="bulk-info">
+                    <span class="bulk-count" id="selectedCount">0</span> bản ghi đã chọn
+                </div>
+                <div class="bulk-actions">
+                    <button class="btn-bulk" id="sendDispatchBtn">Gửi điều vận</button>
+                    <button class="btn-bulk-link" id="deselectAllBtn">Bỏ chọn tất cả</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th class="checkbox-col">
+                                <input type="checkbox" id="selectAll">
+                            </th>
+                            <th>🆔 Mã đơn</th>
+                            <th>🔥 Trạng thái</th>
+                            <th>📅 Ngày tháng</th>
+                            <th>📍 Điểm nhận</th>
+                            <th>📍 Điểm giao</th>
+                            <th class="center">📏 Số km</th>
+                            <th>🙋‍♂️ Khách hàng</th>
+                            <th>📦 Hàng hóa</th>
+                            <th class="center">⚖️ Trọng lượng</th>
+                            <th>🧑‍💼 KD phụ trách</th>
+                            <th>🏷️ Loại hàng</th>
+                            <th class="right">💰 Tổng cộng</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data will be inserted by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="pagination-info" id="paginationInfo"></div>
+                <div class="pagination-controls">
+                    <button class="page-btn" id="prevPage" disabled>Trước</button>
+                    <span class="page-numbers" id="pageNumbers"></span>
+                    <button class="page-btn" id="nextPage">Sau</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
