@@ -25,7 +25,7 @@ body {
     justify-content: space-between;
     padding: 0 24px;
     height: 64px;
-    max-width: 1400px;
+    max-width: auto;
     margin: 0 auto;
 }
 
@@ -75,6 +75,7 @@ body {
 .user-info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .user-name {
@@ -90,7 +91,7 @@ body {
 /* Layout */
 .app-wrapper {
     display: flex;
-    max-width: 1400px;
+    max-width: auto;
     margin: 0 auto;
     position: relative;
 }
@@ -190,6 +191,7 @@ body {
     flex-wrap: wrap;
     gap: 12px;
     margin-bottom: 24px;
+    justify-content: flex-end;
 }
 
 .btn {
@@ -224,6 +226,7 @@ body {
     border-radius: 12px;
     margin-bottom: 24px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    width: fit-content;
 }
 
 .tab {
