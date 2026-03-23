@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMERP - Điều vận | Danh sách đơn chưa điều</title>
+    <link rel="stylesheet" href="dispatch.css">
+</head>
+<body>
+
+   <header class="header">
+        <div class="header-container">
+            <div class="logo-area">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <img src="https://hmerp.laravel.cloud/images/logo_brand.png" alt="HMERP" class="logo">
+            </div>
+            <div class="user-menu" id="userMenu">
+    <div class="avatar">MN</div>
+    <div class="user-info">
+        <div class="user-name">Đào Lê Minh Nguyệt</div>
+        <div class="user-role">Admin</div>
+    </div>
+</div>
+
+<!-- Dropdown Menu - Thêm ngay sau .user-menu -->
+<div class="user-dropdown" id="userDropdown">
+    <div class="dropdown-item" id="profileBtn">
+        <span class="dropdown-icon">👤</span>
+        <span>Hồ sơ</span>
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="dropdown-item" id="changeRoleBtn">
+        <span class="dropdown-icon">🔄</span>
+        <span>Đổi vai trò</span>
+    </div>
+    <div class="dropdown-role-list" id="roleList" style="display: none;">
+         <div class="dropdown-item role-item" data-role="Admin">
+            <span class="dropdown-icon"></span>
+            <span>Admin</span>
+        </div>
+        <div class="dropdown-item role-item" data-role="Kinh doanh">
+            <span class="dropdown-icon">📦</span>
+            <span>Kinh doanh</span>
+        </div>
+        <div class="dropdown-item role-item" data-role="Kho chành">
+            <span class="dropdown-icon">🏭</span>
+            <span>Kho chành</span>
+        </div>
+        <div class="dropdown-item role-item" data-role="Điều vận">
+            <span class="dropdown-icon">🚛</span>
+            <span>Điều vận</span>
+        </div>
+        <div class="dropdown-item role-item" data-role="HCNS">
+            <span class="dropdown-icon">👥</span>
+            <span>HCNS</span>
+        </div>
+        <div class="dropdown-item role-item" data-role="Kế toán">
+            <span class="dropdown-icon">💰</span>
+            <span>Kế toán</span>
+        </div>
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="dropdown-item logout-item" id="logoutBtn">
+        <span class="dropdown-icon">🚪</span>
+        <span>Đăng xuất</span>
+    </div>
+</div>
+        </div>
+    </header>
+
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <img src="https://hmerp.laravel.cloud/images/logo_brand.png" alt="HMERP">
+            </div>
+            <nav class="sidebar-nav">
+                <!-- Nhóm Điều vận -->
+                <div class="nav-group">
+                    <div class="nav-group-title">Điều vận</div>
+                    <a href="#" class="nav-item active" data-page="dispatch-orders">
+                        <span class="nav-icon"></span>
+                        <span>Đơn chưa điều</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="planned-orders">
+                        <span class="nav-icon"></span>
+                        <span>Đơn dự kiến</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="assigned-orders">
+                        <span class="nav-icon"></span>
+                        <span>Đơn đã điều</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="completed-orders">
+                        <span class="nav-icon"></span>
+                        <span>Đơn hoàn thành</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="truck-monitoring">
+                        <span class="nav-icon"></span>
+                        <span>Giám sát xe</span>
+                    </a>
+                </div>
+
+                <!-- Nhóm Yêu cầu -->
+                <div class="nav-group">
+                    <div class="nav-group-title">Yêu cầu</div>
+                    <a href="#" class="nav-item" data-page="leave-request">
+                        <span class="nav-icon"></span>
+                        <span>Nghỉ phép</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="rules">
+                        <span class="nav-icon"></span>
+                        <span>Nội quy</span>
+                    </a>
+                    <!-- <a href="#" class="nav-item" data-page="salary-advance">
+                        <span class="nav-icon">💵</span>
+                        <span>Ứng lương</span>
+                    </a> -->
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Overlay mobile -->
+        <div class="overlay" id="overlay"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1 class="page-title">Danh sách đơn chưa điều</h1>
+
+            <!-- Tabs - Loại hàng -->
+            <div class="tabs">
+                <button class="tab active" data-tab="all">
+                    📋 Tất cả
+                </button>
+                <button class="tab" data-tab="chuyen">
+                    🚚 Hàng chuyến
+                </button>
+                <button class="tab" data-tab="bo">
+                    📦 Hàng bo
+                </button>
+                <button class="tab" data-tab="cau">
+                    🏗️ Hàng cẩu
+                </button>
+                <button class="tab" data-tab="donglanh">
+                    ❄️ Đông lạnh
+                </button>
+                <button class="tab" data-tab="logistics">
+                    📋 Hàng logistics
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-card">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label class="filter-label">🔍 Tìm kiếm</label>
+                        <input type="text" class="filter-input" placeholder="Mã đơn, khách hàng, điều vận..." id="searchInput">
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">📅 Từ ngày</label>
+                        <input type="date" class="filter-input" id="dateFrom">
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">📅 Đến ngày</label>
+                        <input type="date" class="filter-input" id="dateTo">
+                    </div>
+                    <button class="btn-reset" id="resetFilters">
+                        🔄 Đặt lại
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bulk Actions Bar -->
+            <div class="bulk-bar" id="bulkBar" style="display: none;">
+                <div class="bulk-info">
+                    <span class="bulk-count" id="selectedCount">0</span> bản ghi đã chọn
+                </div>
+                <div class="bulk-actions">
+                    <button class="btn-bulk" id="assignDriverBtn">
+                        🚛 Điều xe
+                    </button>
+                    <button class="btn-bulk-link" id="deselectAllBtn">
+                        ✖ Bỏ chọn tất cả
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th class="checkbox-col">
+                                    <input type="checkbox" id="selectAll">
+                                </th>
+                                <th>🆔 Mã đơn</th>
+                                <th>🔥 Trạng thái</th>
+                                <th>📅 Ngày tháng</th>
+                                <th>📍 Điểm nhận</th>
+                                <th>📍 Điểm giao</th>
+                                <th class="center">📏 Khoảng cách</th>
+                                <th>🙋‍♂️ Khách hàng</th>
+                                <th>📦 Hàng hóa</th>
+                                <th class="center">⚖️ Trọng lượng</th>
+                                <th>🧑‍💼 Điều vận</th>
+                                <th>🏷️ Loại hàng</th>
+                                <th class="center">🎯 Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Data will be inserted by JavaScript -->
+                        </tbody>
+                    </table>
+                    <div class="table-header">
+                    <!-- <div class="table-actions">
+                        <button class="btn-export" id="exportExcelBtn">
+                            📥 Xuất Excel
+                        </button>
+                    </div> -->
+                    <div class="records-info" id="recordsInfo">
+                        Hiển thị 0 - 0 của 0 kết quả
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="pagination-info" id="paginationInfo"></div>
+                <div class="pagination-controls">
+                    <button class="page-btn" id="prevPage" disabled>Trước</button>
+                    <span class="page-numbers" id="pageNumbers"></span>
+                    <button class="page-btn" id="nextPage">Sau</button>
+                </div>
+            </div>
+                <!-- <div class="per-page-selector">
+                    <span>Hiển thị:</span>
+                    <select id="perPageSelect">
+                        <option value="10">10</option>
+                        <option value="15" selected>15</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span>kết quả</span>
+                </div> -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal điều xe -->
+    <div class="modal" id="assignModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🚛 Điều xe cho đơn hàng</h3>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Đơn hàng: <strong id="modalOrderId"></strong></p>
+                <div class="form-group">
+                    <label>Chọn tài xế:</label>
+                    <select id="driverSelect" class="form-control">
+                        <option value="">-- Chọn tài xế --</option>
+                        <option value="Nguyễn Văn A">Nguyễn Văn A - Xe 51C-123.45</option>
+                        <option value="Trần Văn B">Trần Văn B - Xe 51C-678.90</option>
+                        <option value="Lê Thị C">Lê Thị C - Xe 51C-111.22</option>
+                        <option value="Phạm Văn D">Phạm Văn D - Xe 51C-333.44</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ghi chú:</label>
+                    <textarea id="assignNote" class="form-control" rows="3" placeholder="Nhập ghi chú (nếu có)..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="cancelModalBtn">Hủy</button>
+                <button class="btn-confirm" id="confirmAssignBtn">Xác nhận điều xe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✅</div>
+        <div class="toast-message" id="toastMessage"></div>
+    </div>
+
+    <script src="dispatch.js"></script>
+</body>
+</html>
