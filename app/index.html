@@ -35,6 +35,10 @@
         <span>Đổi vai trò</span>
     </div>
     <div class="dropdown-role-list" id="roleList" style="display: none;">
+         <div class="dropdown-item role-item" data-role="Admin">
+            <span class="dropdown-icon"></span>
+            <span>Admin</span>
+        </div>
         <div class="dropdown-item role-item" data-role="Kinh doanh">
             <span class="dropdown-icon">📦</span>
             <span>Kinh doanh</span>
@@ -67,47 +71,62 @@
 
     <div class="app-wrapper">
         <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-logo">
-                <img src="https://hmerp.laravel.cloud/images/logo_brand.png" alt="HMERP">
-            </div>
-            <nav class="sidebar-nav">
-                <div class="nav-group">
-                    <div class="nav-group-title">Kinh doanh</div>
-                    <a href="#" class="nav-item active">
-                        <span class="nav-icon">📦</span>
-                        <span>Hàng chuyến</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">📋</span>
-                        <span>Hàng logistics</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">🚚</span>
-                        <span>Hàng chành</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">📊</span>
-                        <span>Báo cáo</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">👥</span>
-                        <span>Khách hàng</span>
-                    </a>
-                </div>
-                <div class="nav-group">
-                    <div class="nav-group-title">Yêu cầu</div>
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">📅</span>
-                        <span>Nghỉ phép</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">📝</span>
-                        <span>Bảng lương</span>
-                    </a>
-                </div>
-            </nav>
-        </aside>
+        <!-- Sidebar Component -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <img src="https://hmerp.laravel.cloud/images/logo_brand.png" alt="HMERP">
+    </div>
+    <nav class="sidebar-nav">
+        <!-- Nhóm Kinh doanh -->
+        <div class="nav-group">
+            <div class="nav-group-title">Kinh doanh</div>
+            <a href="#" class="nav-item active" data-page="orders">
+                <span class="nav-icon">📦</span>
+                <span>Hàng chuyến</span>
+            </a>
+            <a href="#" class="nav-item" data-page="logistics">
+                <span class="nav-icon">📋</span>
+                <span>Hàng logistics</span>
+            </a>
+            <a href="#" class="nav-item" data-page="freight">
+                <span class="nav-icon">🚚</span>
+                <span>Hàng chành</span>
+            </a>
+            <a href="#" class="nav-item" data-page="report">
+                <span class="nav-icon"></span>
+                <span>Theo dõi thanh toán</span>
+            </a>
+                        <a href="#" class="nav-item" data-page="report">
+                <span class="nav-icon">📋</span>
+                <span>Bảng kê</span>
+            </a>
+            <a href="#" class="nav-item" data-page="customer">
+                <span class="nav-icon">👥</span>
+                <span>Quản lý KH</span>
+            </a>
+                        <a href="#" class="nav-item" data-page="report">
+                <span class="nav-icon">📊</span>
+                <span>Báo cáo kinh doanh</span>
+            </a>
+        </div>
+
+        <!-- Nhóm Yêu cầu -->
+        <div class="nav-group">
+            <div class="nav-group-title">Yêu cầu</div>
+            <a href="#" class="nav-item" data-page="leave">
+                <span class="nav-icon">📅</span>
+                <span>Nghỉ phép</span>
+            <a href="#" class="nav-item" data-page="rules">
+                <span class="nav-icon">📜</span>
+                <span>Nội quy</span>
+            <!-- </a>
+            <a href="#" class="nav-item" data-page="salary">
+                <span class="nav-icon">💵</span>
+                <span>Ứng lương</span>
+            </a> -->
+        </div>
+    </nav>
+</aside>
 
         <!-- Overlay mobile -->
         <div class="overlay" id="overlay"></div>
